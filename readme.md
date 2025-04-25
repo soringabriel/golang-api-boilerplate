@@ -28,6 +28,11 @@ Follow the steps below to get started:
 
 ---
 
+## 🧩 Example Endpoints
+
+This boilerplate includes example CRUD endpoints for a `User` model to demonstrate structure and usage.
+These can be freely removed or replaced when building your own API.
+
 ## 📁 Project Structure
 
 This project follows a lightweight MVC-inspired structure:
