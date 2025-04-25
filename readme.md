@@ -66,7 +66,7 @@ This project follows a lightweight MVC-inspired structure:
 
 ## 🧪 Testing
 
-To run the integration tests, make sure the Docker service is up and running **and** you have a `.env-tests` file configured.
+To run the integration tests, make sure the Docker service is up and running.
 
 Then execute the following command:
 

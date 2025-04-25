@@ -8,15 +8,29 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    services:
+      docker:
+        image: docker:dind
+        options: >-
+          --privileged
+        ports:
+          - 2375:2375
+        env:
+          DOCKER_TLS_CERTDIR: ""
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
           go-version: 1.24
+
       - name: Install dependencies
         run: go mod tidy
+
       - name: Run tests
+        env:
+          DOCKER_HOST: unix:///var/run/docker.sock
         run: go test -parallel=1 -count=1 ./tests
