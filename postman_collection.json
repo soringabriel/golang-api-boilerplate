@@ -1,0 +1,148 @@
+{
+	"info": {
+		"_postman_id": "d92ba932-62c0-4bdf-9c95-fc398a255431",
+		"name": "Golang API Boilerplate",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6848756"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Jon\",\r\n    \"email\": \"jondoe@test.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/user/create",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"user",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}/user/read?limit=1&skip=0",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"user",
+								"read"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "1"
+								},
+								{
+									"key": "skip",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"filter\": {\r\n        \"email\": \"jondoe@test.com\"\r\n    },\r\n    \"set\": {\r\n        \"name\": \"Doe\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/user/update",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"user",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"jondoe@test.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/user/delete",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"user",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
