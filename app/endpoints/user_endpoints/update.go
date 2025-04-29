@@ -15,8 +15,10 @@ import (
 )
 
 var UpdateUserEndpoint = &endpoints.Endpoint{
-	Path:        "/user/update",
-	Middlewares: []middlewares.Middleware{middlewares.AuthMiddleware},
+	Path: "/user/update",
+	Middlewares: []middlewares.Middleware{
+		middlewares.AuthMiddlewareFactory(),
+	},
 	HandlerFunc: func(w http.ResponseWriter, r *http.Request) {
 		// Read and validate request
 		request := user_requests.UpdateRequest{}

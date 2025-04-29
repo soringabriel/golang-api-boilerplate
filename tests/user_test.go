@@ -22,13 +22,13 @@ func TestUserEndpointsValidation(t *testing.T) {
 	err := helpers.TestRequest(
 		fmt.Sprintf(
 			"http://%s%s",
-			helpers.EnvVariable("API_IP_PORT"),
+			helpers.GetEnvVariable("API_IP_PORT"),
 			user_endpoints.CreateUserEndpoint.Path,
 		),
 		&createRequest,
 		map[string]string{
 			"Accept":        "application/json",
-			"Authorization": fmt.Sprintf("Bearer %s", helpers.EnvVariable("AUTH_TOKEN")),
+			"Authorization": fmt.Sprintf("Bearer %s", helpers.GetEnvVariable("AUTH_TOKEN")),
 		},
 		*bad_request_responses.BadRequestResponse(&createRequest, errors.New("email is required")),
 	)
@@ -43,13 +43,13 @@ func TestUserEndpointsValidation(t *testing.T) {
 	err = helpers.TestRequest(
 		fmt.Sprintf(
 			"http://%s%s",
-			helpers.EnvVariable("API_IP_PORT"),
+			helpers.GetEnvVariable("API_IP_PORT"),
 			user_endpoints.ReadUserEndpoint.Path,
 		),
 		&readRequest,
 		map[string]string{
 			"Accept":        "application/json",
-			"Authorization": fmt.Sprintf("Bearer %s", helpers.EnvVariable("AUTH_TOKEN")),
+			"Authorization": fmt.Sprintf("Bearer %s", helpers.GetEnvVariable("AUTH_TOKEN")),
 		},
 		*bad_request_responses.BadRequestResponse(&readRequest, errors.New("limit must be between 0 and 100")),
 	)
@@ -63,13 +63,13 @@ func TestUserEndpointsValidation(t *testing.T) {
 	err = helpers.TestRequest(
 		fmt.Sprintf(
 			"http://%s%s",
-			helpers.EnvVariable("API_IP_PORT"),
+			helpers.GetEnvVariable("API_IP_PORT"),
 			user_endpoints.UpdateUserEndpoint.Path,
 		),
 		&updateRequest,
 		map[string]string{
 			"Accept":        "application/json",
-			"Authorization": fmt.Sprintf("Bearer %s", helpers.EnvVariable("AUTH_TOKEN")),
+			"Authorization": fmt.Sprintf("Bearer %s", helpers.GetEnvVariable("AUTH_TOKEN")),
 		},
 		*bad_request_responses.BadRequestResponse(&updateRequest, errors.New("email is required")),
 	)
@@ -83,13 +83,13 @@ func TestUserEndpointsValidation(t *testing.T) {
 	err = helpers.TestRequest(
 		fmt.Sprintf(
 			"http://%s%s",
-			helpers.EnvVariable("API_IP_PORT"),
+			helpers.GetEnvVariable("API_IP_PORT"),
 			user_endpoints.DeleteUserEndpoint.Path,
 		),
 		&deleteRequest,
 		map[string]string{
 			"Accept":        "application/json",
-			"Authorization": fmt.Sprintf("Bearer %s", helpers.EnvVariable("AUTH_TOKEN")),
+			"Authorization": fmt.Sprintf("Bearer %s", helpers.GetEnvVariable("AUTH_TOKEN")),
 		},
 		*bad_request_responses.BadRequestResponse(&deleteRequest, errors.New("email is required")),
 	)
@@ -113,13 +113,13 @@ func TestUserEndpoints(t *testing.T) {
 	err := helpers.TestRequest(
 		fmt.Sprintf(
 			"http://%s%s",
-			helpers.EnvVariable("API_IP_PORT"),
+			helpers.GetEnvVariable("API_IP_PORT"),
 			user_endpoints.CreateUserEndpoint.Path,
 		),
 		&createRequest,
 		map[string]string{
 			"Accept":        "application/json",
-			"Authorization": fmt.Sprintf("Bearer %s", helpers.EnvVariable("AUTH_TOKEN")),
+			"Authorization": fmt.Sprintf("Bearer %s", helpers.GetEnvVariable("AUTH_TOKEN")),
 		},
 		responses.Response{
 			StatusCode: http.StatusOK,
@@ -142,13 +142,13 @@ func TestUserEndpoints(t *testing.T) {
 	err = helpers.TestRequest(
 		fmt.Sprintf(
 			"http://%s%s",
-			helpers.EnvVariable("API_IP_PORT"),
+			helpers.GetEnvVariable("API_IP_PORT"),
 			user_endpoints.ReadUserEndpoint.Path,
 		),
 		&readRequest,
 		map[string]string{
 			"Accept":        "application/json",
-			"Authorization": fmt.Sprintf("Bearer %s", helpers.EnvVariable("AUTH_TOKEN")),
+			"Authorization": fmt.Sprintf("Bearer %s", helpers.GetEnvVariable("AUTH_TOKEN")),
 		},
 		responses.Response{
 			StatusCode: http.StatusOK,
@@ -181,13 +181,13 @@ func TestUserEndpoints(t *testing.T) {
 	err = helpers.TestRequest(
 		fmt.Sprintf(
 			"http://%s%s",
-			helpers.EnvVariable("API_IP_PORT"),
+			helpers.GetEnvVariable("API_IP_PORT"),
 			user_endpoints.UpdateUserEndpoint.Path,
 		),
 		&updateRequest,
 		map[string]string{
 			"Accept":        "application/json",
-			"Authorization": fmt.Sprintf("Bearer %s", helpers.EnvVariable("AUTH_TOKEN")),
+			"Authorization": fmt.Sprintf("Bearer %s", helpers.GetEnvVariable("AUTH_TOKEN")),
 		},
 		responses.Response{
 			StatusCode: http.StatusOK,
@@ -209,13 +209,13 @@ func TestUserEndpoints(t *testing.T) {
 	err = helpers.TestRequest(
 		fmt.Sprintf(
 			"http://%s%s",
-			helpers.EnvVariable("API_IP_PORT"),
+			helpers.GetEnvVariable("API_IP_PORT"),
 			user_endpoints.ReadUserEndpoint.Path,
 		),
 		&readRequest,
 		map[string]string{
 			"Accept":        "application/json",
-			"Authorization": fmt.Sprintf("Bearer %s", helpers.EnvVariable("AUTH_TOKEN")),
+			"Authorization": fmt.Sprintf("Bearer %s", helpers.GetEnvVariable("AUTH_TOKEN")),
 		},
 		responses.Response{
 			StatusCode: http.StatusOK,
@@ -242,13 +242,13 @@ func TestUserEndpoints(t *testing.T) {
 	err = helpers.TestRequest(
 		fmt.Sprintf(
 			"http://%s%s",
-			helpers.EnvVariable("API_IP_PORT"),
+			helpers.GetEnvVariable("API_IP_PORT"),
 			user_endpoints.DeleteUserEndpoint.Path,
 		),
 		&deleteRequest,
 		map[string]string{
 			"Accept":        "application/json",
-			"Authorization": fmt.Sprintf("Bearer %s", helpers.EnvVariable("AUTH_TOKEN")),
+			"Authorization": fmt.Sprintf("Bearer %s", helpers.GetEnvVariable("AUTH_TOKEN")),
 		},
 		responses.Response{
 			StatusCode: http.StatusOK,
@@ -270,13 +270,13 @@ func TestUserEndpoints(t *testing.T) {
 	err = helpers.TestRequest(
 		fmt.Sprintf(
 			"http://%s%s",
-			helpers.EnvVariable("API_IP_PORT"),
+			helpers.GetEnvVariable("API_IP_PORT"),
 			user_endpoints.DeleteUserEndpoint.Path,
 		),
 		&deleteRequest,
 		map[string]string{
 			"Accept":        "application/json",
-			"Authorization": fmt.Sprintf("Bearer %s", helpers.EnvVariable("AUTH_TOKEN")),
+			"Authorization": fmt.Sprintf("Bearer %s", helpers.GetEnvVariable("AUTH_TOKEN")),
 		},
 		responses.Response{
 			StatusCode: http.StatusOK,
@@ -297,13 +297,13 @@ func TestUserEndpoints(t *testing.T) {
 	err = helpers.TestRequest(
 		fmt.Sprintf(
 			"http://%s%s",
-			helpers.EnvVariable("API_IP_PORT"),
+			helpers.GetEnvVariable("API_IP_PORT"),
 			user_endpoints.ReadUserEndpoint.Path,
 		),
 		&readRequest,
 		map[string]string{
 			"Accept":        "application/json",
-			"Authorization": fmt.Sprintf("Bearer %s", helpers.EnvVariable("AUTH_TOKEN")),
+			"Authorization": fmt.Sprintf("Bearer %s", helpers.GetEnvVariable("AUTH_TOKEN")),
 		},
 		responses.Response{
 			StatusCode: http.StatusOK,

@@ -16,7 +16,7 @@ func TestMissingAuth(t *testing.T) {
 	err := helpers.TestRequest(
 		fmt.Sprintf(
 			"http://%s%s",
-			helpers.EnvVariable("API_IP_PORT"),
+			helpers.GetEnvVariable("API_IP_PORT"),
 			user_endpoints.ReadUserEndpoint.Path,
 		),
 		&user_requests.ReadRequest{},
@@ -34,7 +34,7 @@ func TestWrongAuth(t *testing.T) {
 	err := helpers.TestRequest(
 		fmt.Sprintf(
 			"http://%s%s",
-			helpers.EnvVariable("API_IP_PORT"),
+			helpers.GetEnvVariable("API_IP_PORT"),
 			user_endpoints.ReadUserEndpoint.Path,
 		),
 		&user_requests.ReadRequest{},

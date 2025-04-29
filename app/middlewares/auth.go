@@ -9,37 +9,41 @@ import (
 	"api/helpers"
 )
 
-func AuthMiddleware(next http.HandlerFunc) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		authHeader := r.Header.Get("Authorization")
-		if authHeader == "" || !strings.HasPrefix(authHeader, "Bearer ") {
-			bad_request_responses.MissingAuthResponse.Write(w)
-			return
-		}
+func AuthMiddlewareFactory() Middleware {
+	return func(next http.HandlerFunc) http.HandlerFunc {
+		return func(w http.ResponseWriter, r *http.Request) {
+			authHeader := r.Header.Get("Authorization")
+			if authHeader == "" || !strings.HasPrefix(authHeader, "Bearer ") {
+				bad_request_responses.MissingAuthResponse.Write(w)
+				return
+			}
 
-		token := strings.TrimPrefix(authHeader, "Bearer ")
-		if token != helpers.EnvVariable("AUTH_TOKEN") {
-			bad_request_responses.WrongAuthResponse.Write(w)
-			return
-		}
+			token := strings.TrimPrefix(authHeader, "Bearer ")
+			if token != helpers.GetEnvVariable("AUTH_TOKEN") {
+				bad_request_responses.WrongAuthResponse.Write(w)
+				return
+			}
 
-		next(w, r)
+			next(w, r)
+		}
 	}
 }
 
-func ApiKeyMiddleware(next http.HandlerFunc) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		apiKey := r.URL.Query().Get("api_key")
-		if apiKey == "" {
-			bad_request_responses.MissingAuthResponse.Write(w)
-			return
-		}
+func ApiKeyMiddlewareFactory() Middleware {
+	return func(next http.HandlerFunc) http.HandlerFunc {
+		return func(w http.ResponseWriter, r *http.Request) {
+			apiKey := r.URL.Query().Get("api_key")
+			if apiKey == "" {
+				bad_request_responses.MissingAuthResponse.Write(w)
+				return
+			}
 
-		if apiKey != helpers.EnvVariable("AUTH_API_KEY") {
-			bad_request_responses.WrongAuthResponse.Write(w)
-			return
-		}
+			if apiKey != helpers.GetEnvVariable("AUTH_API_KEY") {
+				bad_request_responses.WrongAuthResponse.Write(w)
+				return
+			}
 
-		next(w, r)
+			next(w, r)
+		}
 	}
 }

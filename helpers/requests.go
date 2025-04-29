@@ -4,8 +4,10 @@ import (
 	"bytes"
 	"fmt"
 	"io"
+	"net"
 	"net/http"
 	"net/url"
+	"strings"
 )
 
 type HttpRequestParams struct {
@@ -53,4 +55,33 @@ func HttpRequest(params HttpRequestParams) (*http.Response, string, error) {
 	}
 
 	return resp, string(body), nil
+}
+
+func GetRequestClientIP(r *http.Request) string {
+	// Check X-Forwarded-For header
+	ip := r.Header.Get("X-Forwarded-For")
+	if ip != "" {
+		// X-Forwarded-For may contain multiple IPs separated by commas
+		parts := strings.Split(ip, ",")
+		// Take the first non-empty IP and trim spaces
+		for _, part := range parts {
+			p := strings.TrimSpace(part)
+			if p != "" {
+				return p
+			}
+		}
+	}
+
+	// Fallback to X-Real-IP
+	ip = r.Header.Get("X-Real-Ip")
+	if ip != "" {
+		return strings.TrimSpace(ip)
+	}
+
+	// Fallback to RemoteAddr
+	ip, _, err := net.SplitHostPort(r.RemoteAddr)
+	if err != nil {
+		return r.RemoteAddr
+	}
+	return ip
 }

@@ -4,7 +4,7 @@ import (
 	"os"
 )
 
-func EnvVariable(key string) string {
+func GetEnvVariable(key string) string {
 	return os.Getenv(key)
 }
 

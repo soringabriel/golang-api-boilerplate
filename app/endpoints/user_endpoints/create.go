@@ -13,8 +13,10 @@ import (
 )
 
 var CreateUserEndpoint = &endpoints.Endpoint{
-	Path:        "/user/create",
-	Middlewares: []middlewares.Middleware{middlewares.AuthMiddleware},
+	Path: "/user/create",
+	Middlewares: []middlewares.Middleware{
+		middlewares.AuthMiddlewareFactory(),
+	},
 	HandlerFunc: func(w http.ResponseWriter, r *http.Request) {
 		// Read and validate request
 		request := user_requests.CreateRequest{}

@@ -16,10 +16,11 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-var ReadUserEndpoint = &endpoints.Endpoint{
-	Path: "/user/read",
+var ReadLimitedUserEndpoint = &endpoints.Endpoint{
+	Path: "/user/read-limited",
 	Middlewares: []middlewares.Middleware{
 		middlewares.AuthMiddlewareFactory(),
+		middlewares.EndpointIpRateLimitMiddlewareFactory(1),
 	},
 	HandlerFunc: func(w http.ResponseWriter, r *http.Request) {
 		// Read and validate request

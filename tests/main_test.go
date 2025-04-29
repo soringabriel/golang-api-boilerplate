@@ -7,6 +7,7 @@ import (
 	"testing"
 	"time"
 
+	"api/app/endpoints"
 	"api/app/endpoints/user_endpoints"
 	"api/databases"
 	"api/helpers"
@@ -47,15 +48,17 @@ func TestMain(m *testing.M) {
 	databases.SetupMongodbDatabase()
 
 	// Setup endpoints
+	endpoints.SetupUniversalMiddlewares()
 	http.HandleFunc(user_endpoints.CreateUserEndpoint.Path, user_endpoints.CreateUserEndpoint.ServeHTTP)
 	http.HandleFunc(user_endpoints.ReadUserEndpoint.Path, user_endpoints.ReadUserEndpoint.ServeHTTP)
+	http.HandleFunc(user_endpoints.ReadLimitedUserEndpoint.Path, user_endpoints.ReadLimitedUserEndpoint.ServeHTTP)
 	http.HandleFunc(user_endpoints.UpdateUserEndpoint.Path, user_endpoints.UpdateUserEndpoint.ServeHTTP)
 	http.HandleFunc(user_endpoints.DeleteUserEndpoint.Path, user_endpoints.DeleteUserEndpoint.ServeHTTP)
 
 	// Start server
 	go func() {
-		logger.Instance.Info("Start server on " + helpers.EnvVariable("API_IP_PORT"))
-		err = http.ListenAndServe(helpers.EnvVariable("API_IP_PORT"), nil)
+		logger.Instance.Info("Start server on " + helpers.GetEnvVariable("API_IP_PORT"))
+		err = http.ListenAndServe(helpers.GetEnvVariable("API_IP_PORT"), nil)
 		if err != nil {
 			logger.Instance.Fatal("Failed to start server", err)
 		}

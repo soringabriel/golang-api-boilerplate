@@ -15,8 +15,10 @@ import (
 )
 
 var DeleteUserEndpoint = &endpoints.Endpoint{
-	Path:        "/user/delete",
-	Middlewares: []middlewares.Middleware{middlewares.AuthMiddleware},
+	Path: "/user/delete",
+	Middlewares: []middlewares.Middleware{
+		middlewares.AuthMiddlewareFactory(),
+	},
 	HandlerFunc: func(w http.ResponseWriter, r *http.Request) {
 		// Read and validate request
 		request := user_requests.DeleteRequest{}

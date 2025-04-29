@@ -24,7 +24,6 @@ func TestRequest(
 		Headers: requestHeaders,
 	}
 	if method == http.MethodGet {
-		fmt.Println(string(request.GetParams()))
 		err := json.Unmarshal(request.GetParams(), &httpRequestParams.QueryParams)
 		if err != nil {
 			return fmt.Errorf("error unmarshalling params: %v", err)

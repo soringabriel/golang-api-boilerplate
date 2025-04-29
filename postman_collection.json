@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "d92ba932-62c0-4bdf-9c95-fc398a255431",
+		"_postman_id": "fa878330-072d-4264-af83-e82a1e832230",
 		"name": "Golang API Boilerplate",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "6848756"
@@ -44,6 +44,40 @@
 				},
 				{
 					"name": "Read",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}/user/read-limited?limit=1&skip=0",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"user",
+								"read-limited"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "1"
+								},
+								{
+									"key": "skip",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read Limited",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -137,6 +171,40 @@
 							"path": [
 								"user",
 								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read Limited",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}/user/read?limit=1&skip=0",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"user",
+								"read"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "1"
+								},
+								{
+									"key": "skip",
+									"value": "0"
+								}
 							]
 						}
 					},

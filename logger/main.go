@@ -27,7 +27,7 @@ func SetupLogger() {
 		if err != nil {
 			logrus.Fatalf("Failed to get outbound IP: %v", err)
 		}
-		appName := helpers.EnvVariable("APP_NAME")
+		appName := helpers.GetEnvVariable("APP_NAME")
 		Instance = logrus.WithFields(logrus.Fields{
 			"hostname": ip,
 			"appname":  appName,
@@ -35,17 +35,17 @@ func SetupLogger() {
 		})
 
 		// Logging to file
-		logFile := helpers.EnvVariable("LOG_FILE")
+		logFile := helpers.GetEnvVariable("LOG_FILE")
 		if len(logFile) > 0 {
-			logMaxSizeMB, err := strconv.Atoi(helpers.EnvVariable("LOG_MAX_SIZE_MB"))
+			logMaxSizeMB, err := strconv.Atoi(helpers.GetEnvVariable("LOG_MAX_SIZE_MB"))
 			if err != nil {
 				Instance.Fatal("Failed to convert LOG_MAX_SIZE_MB env variable to int", err)
 			}
-			logMaxBackups, err := strconv.Atoi(helpers.EnvVariable("LOG_MAX_BACKUPS"))
+			logMaxBackups, err := strconv.Atoi(helpers.GetEnvVariable("LOG_MAX_BACKUPS"))
 			if err != nil {
 				Instance.Fatal("Failed to convert LOG_MAX_BACKUPS env variable to int", err)
 			}
-			logMaxAge, err := strconv.Atoi(helpers.EnvVariable("LOG_MAX_AGE"))
+			logMaxAge, err := strconv.Atoi(helpers.GetEnvVariable("LOG_MAX_AGE"))
 			if err != nil {
 				Instance.Fatal("Failed to convert LOG_MAX_AGE env variable to int", err)
 			}

@@ -22,9 +22,9 @@ type MongodbClient struct {
 }
 
 func SetupMongodbDatabase() {
-	mongodbUrl := helpers.EnvVariable("MONGODB_URL")
-	mongodbDbName := helpers.EnvVariable("MONGODB_DB_NAME")
-	mongodbCtxTimeoutString := helpers.EnvVariable("MONGODB_CTX_TIMEOUT")
+	mongodbUrl := helpers.GetEnvVariable("MONGODB_URL")
+	mongodbDbName := helpers.GetEnvVariable("MONGODB_DB_NAME")
+	mongodbCtxTimeoutString := helpers.GetEnvVariable("MONGODB_CTX_TIMEOUT")
 	mongodbCtxTimeoutInt, err := strconv.Atoi(mongodbCtxTimeoutString)
 	if err != nil {
 		logger.Instance.Fatal("Failed to convert MONGODB_CTX_TIMEOUT env variable to int", err)
